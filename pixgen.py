@@ -38,13 +38,16 @@ class MyConv2Dtranspose(tf.keras.layers.Layer):
   # @tf.function(experimental_relax_shapes=True)
   def call(self, input):
     frames = self.frames
-    out = tf.nn.conv2d_transpose(input[:,0,:,:,:], self.filters, self.out_shape, self.stride, self.padding)
-    out = tf.expand_dims(out, axis=1)
-    i = tf.constant(1)
-    # for i in range(1, frames):
-    condition = lambda i,out : i < frames
-    body = lambda i,out : (i+1 , tf.concat([out, tf.expand_dims(tf.nn.conv2d_transpose(input[:, i, :, :, :], self.filters, self.out_shape, self.stride, self.padding),axis=1)], axis=1))
-    i,out = tf.while_loop(condition,body,[i,out], shape_invariants=[i.get_shape(),tf.TensorShape([self.in_shape[0],None,out.shape[2],out.shape[3],out.shape[4]])])
+    in_shape = input.shape[-3:]
+    x = tf.reshape(input,[-1] + in_shape.as_list())
+    out1 = tf.nn.conv2d_transpose(x, self.filters, self.out_shape, self.stride, self.padding)
+    out_shape = out1.shape[-3:]
+    out = tf.reshape(out1,[-1]+[self.frames]+out_shape.as_list())
+    # i = tf.constant(1)
+    # # for i in range(1, frames):
+    # condition = lambda i,out : i < frames
+    # body = lambda i,out : (i+1 , tf.concat([out, tf.expand_dims(tf.nn.conv2d_transpose(input[:, i, :, :, :], self.filters, self.out_shape, self.stride, self.padding),axis=1)], axis=1))
+    # i,out = tf.while_loop(condition,body,[i,out], shape_invariants=[i.get_shape(),tf.TensorShape([self.in_shape[0],None,out.shape[2],out.shape[3],out.shape[4]])])
     return out
 
 def upsample(filters, size, out_shape, apply_dropout=False):

@@ -13,7 +13,7 @@ class PatchDiscriminator(tf.keras.Model):
         ops = tf.keras.Sequential()
         kernel_size = 4
         padding = 'same'
-        ops.add(tf.keras.layers.Conv2D(channels, kernel_size=kernel_size, strides= 2, padding= padding, input_shape=(224,224,3)))
+        ops.add(tf.keras.layers.Conv2D(channels, kernel_size=kernel_size, strides= 2, padding= padding, input_shape=(4,256,256,3)))
         ops.add(tf.keras.layers.LeakyReLU(0.2))
         nf_mult = 1    #  for increasing number of channels
         for i in range(1, n_layers):
