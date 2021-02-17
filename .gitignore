@@ -1,0 +1,11 @@
+.idea/misc.xml
+.idea/modules.xml
+.idea/other.xml
+.idea/vcs.xml
+.idea/project-maxine.iml
+.idea/inspectionProfiles/Project_Default.xml
+.idea/inspectionProfiles/profiles_settings.xml
+__pycache__/pixgen.cpython-37.pyc
+__pycache__/test.cpython-37.pyc
+__pycache__/patchdiscriminator.cpython-37.pyc
+.idea
