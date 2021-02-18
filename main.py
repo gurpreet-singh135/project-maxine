@@ -62,12 +62,12 @@ if __name__ == '__main__':
     # model(input_data)
     # print("Graph time:", timeit.timeit(lambda: model(input_data), number=100))
     # model = PatchDiscriminator()
-    # print(model(tf.random.normal([1,4,256,256,3])))
+    # print(model(tf.random.normal([1,4,256,256,3])).shape)
     # model.summary()
     # for layer in model.layers:
     #     print(layer.output_shape)
-    model = PixGenerator(input_shape=[2,256,256,3])
-    print(model(tf.random.normal([2,2,256,256,3])))
+    model = PixGenerator(input_shape=[3,256,256,3])
+    print(model(tf.random.normal([2,3,256,256,3])))
     model.summary()
     for layer in model.layers:
         print(layer.output_shape)
