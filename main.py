@@ -66,9 +66,10 @@ if __name__ == '__main__':
     # model.summary()
     # for layer in model.layers:
     #     print(layer.output_shape)
-    model = PixGenerator(input_shape=[3,256,256,3])
-    print(model(tf.random.normal([2,3,256,256,3])))
+    model = PixGenerator(input_shape=[30,256,256,3])
+    print(model(tf.random.normal([2,30,256,256,3])).shape)
     model.summary()
     for layer in model.layers:
         print(layer.output_shape)
+
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/

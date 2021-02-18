@@ -30,7 +30,7 @@ class MyConv2Dtranspose(tf.keras.layers.Layer):
 
   def build(self, input_shape):
     self.filters = self.add_weight("filters",
-                                   shape=[input_shape[2], input_shape[3], self.out_channels, input_shape[4]],
+                                   shape=[self.kernel_size, self.kernel_size, self.out_channels, input_shape[4]],
                                    initializer=self.initializer)
     self.frames = input_shape[1]
     self.in_shape = input_shape
